@@ -1,8 +1,3 @@
-# Question 2 Attempted in Tablet
-
-
-# Question 3
-
 class SinglyListNode:
     def __init__(self, data):
         self.data = data
@@ -95,35 +90,35 @@ class SinglyLinkedList:
             temp = temp.next
         return size
 
+    def mergeList(s1, s2):
+        
 
-class MyQueue:
-    def __init__ (self):
-        self.q = SinglyLinkedList()
+s1 = SinglyLinkedList()
+s2 = SinglyLinkedList()
+n1 = SinglyListNode(3)
+n2 = SinglyListNode(6)
+n3 = SinglyListNode(6)
+n4 = SinglyListNode(10)
+n5 = SinglyListNode(45)
+n6 = SinglyListNode(45)
+n7 = SinglyListNode(50)
+n8 = SinglyListNode(2)
+n9 = SinglyListNode(3)
+n10 = SinglyListNode(55)
+n11 = SinglyListNode(60)
+s1.insertAtHead(n7)
+s1.insertAtHead(n6)
+s1.insertAtHead(n5)
+s1.insertAtHead(n4)
+s1.insertAtHead(n3)
+s1.insertAtHead(n2)
+s1.insertAtHead(n1)
+s2.insertAtHead(n11)
+s2.insertAtHead(n10)
+s2.insertAtHead(n9)
+s2.insertAtHead(n8)
+s1.printList()
+s2.printList()
 
-    def enqueue(self, value):
-        self.q.insertAtHead(value)
-
-    def printQueue(self):
-        self.q.printList()
-
-    def dequeue(self):
-        value = self.q.search(self.q.size() - 1)
-        self.q.deleteAt(self.q.size() - 1)
-        return value
-
-    def peek(self):
-        last = self.q.size() - 1
-        return self.q.search(last).data
-
-queue = MyQueue()
-node1 = SinglyListNode(10)
-node2 = SinglyListNode(3)
-node3= SinglyListNode(55)
-node4= SinglyListNode(27)
-queue.enqueue(node1)
-queue.enqueue(node2)
-queue.enqueue(node3)
-queue.enqueue(node4)
-queue.dequeue()
-print(queue.peek())
-queue.printQueue()
+# s3 = mergeList(s1,s2)
+# s3.printList()
