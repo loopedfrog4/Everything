@@ -1,0 +1,7 @@
+print(f\"Hello, {self.queue.deleteAt(self.queue.size() - 1)}\")
+print(f\"Hello, {self.queue.deleteAt(self.queue.size() - 1)}\")
+()()))
+((()))
+return self.queue.searchByIndex(self.queue.size() - 1)
+())
+(())
