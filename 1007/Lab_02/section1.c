@@ -4,7 +4,7 @@
  
 int main () 
 { 
-    int i = 0, j = 0, numProcesses= 0, timeSlice = 0, maxBurstTime = 0, temp = 0; 
+    int i = 0, j = 0, numProcesses= 0, timeSlice = 0, maxBurstTime = 0, temp = 0;
     int  burstTime[10], backupBurstTime[10], waitTime[10], turnAroundTime[10], responseTime[10]; 
     float avgWaitTime = 0.0, avgTurnAroundTime = 0.0, avgResponseTime = 0.0; 
  
@@ -42,16 +42,27 @@ int main ()
         } 
     } 
  
-    /*Calculate the ‘waiting time’, ‘turn-around-time’ and  
-      'response time' for each process. */ 
- 
+    /*Calculate the ‘waiting time’, ‘turn-around-time’ and 'response time' for each process. */ 
+    for (i = 0; i < numProcesses; i++){
+        waitTime[i] = turnAroundTime[i] - backupBurstTime[i];
+        responseTime[i] = i * timeSlice;
+
+    }
            
  
     printf("\n\t PROCESS\t BURST TIME\t WAITING TIME\t TURNAROUND TIME\t RESPONSE TIME\n"); 
     for (i = 0; i < numProcesses; i++) 
-        printf("\t P%d \t %d \t\t %d \t\t %d \t\t\t %d \n",  
-            i + 1, backupBurstTime[i], waitTime[i], turnAroundTime[i], responseTime[i]); 
+        printf("\t P%d \t %d \t\t %d \t\t %d \t\t\t %d \n",  i + 1, backupBurstTime[i], waitTime[i], turnAroundTime[i], responseTime[i]); 
+        
  
+    for (i = 0;i < numProcesses; i++){
+        avgWaitTime += waitTime[i];
+        avgTurnAroundTime += turnAroundTime[i];
+        avgResponseTime += responseTime[i];
+    }
+
+
+
     /*Calculate and print the ‘average waiting time’,  
     ‘average turn-around-time’, and 'average response time' */ 
     printf("\n\t The Average Waiting time: %.2f\n", avgWaitTime / numProcesses); 
