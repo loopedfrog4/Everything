@@ -1,0 +1,1 @@
+from_numpy() automatically inherits input array dtype

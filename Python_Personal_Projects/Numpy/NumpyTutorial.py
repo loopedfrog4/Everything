@@ -2,9 +2,9 @@ import numpy as np
 
 # a = np.array([[1,2,3,4,5,6,7,8,9], [9,8,7,6,5,4,3,2,1]],dtype='int8')
 # a[1, 1:8:2] = [5,5,5,5]
-
 # print(a[1, 1:8:2])
 # print(a.shape)
+
 
 # b = np.array([[[1,2],[3,4]], [[5,6],[7,8]]])
 # [[[1 2]
@@ -18,7 +18,6 @@ import numpy as np
 
 # c = np.zeros((2,3))
 # print(c)
-
 
 # d = np.ones((4,2,3), dtype="int8")
 # print(d)
@@ -43,21 +42,42 @@ def challenge1Array():
     return challenge
 # print(challenge1Array())
 
-a = np.array([1,2,3])
-b = a.copy()
-b[0] = 100
+# a = np.array([1,2,3])
+# b = np.array([4,5,6])
+# print(a + b)
+
+# a = np.ones((2,3))
+# b = np.full((3,2), 5)
+# print(np.matmul(a,b))
+
+# stats = np.array([[1,2,3],[4,5,6]])
+# print(stats)
+# print(np.min(stats, axis = 0 ))
+# print(np.sum(stats, axis = 1))
+
+# before = np.array([[1,2,3],[4,5,6]])
+# print(before)
+# print(before.reshape(6,1))
+
+# v1 = np.array([1,2,3])
+# v2 = np.array([4,5,6])
+
+# print(np.vstack([v1, v2, v2, v1, v2]))
+# print(np.hstack([v1, v2, v2, v1, v2]))
+ 
+fileData = np.genfromtxt('Python_Personal_Projects\\Numpy\\data.txt', delimiter=",")
+# fileData.astype('int8')
+# print(fileData.shape)
+
+# print(fileData[fileData > 50])
+# print(((fileData > 50) & (fileData < 100)))
+
+# Challenge 2
+a = np.random.randint(30, size=(6,5))
 print(a)
-print(b)
-
-
-
-
-
-
-
-
-
-
+# print(a[[0,1,2,3],[1,2,3,4]])
+print(a[[0,4,5], 2:4])
+# print(a[2:4, 0:2])
 
 
 
