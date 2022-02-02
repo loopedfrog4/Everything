@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 from laptop
+=======
+from pc
+>>>>>>> 839c3f250c89b92cc35e8c5460cb7b4e8051ab12
