@@ -4,9 +4,11 @@
  
 int main () {
     // Initialise necessary variables from specifications, arrival time not included since all processes arrives at T0
-    int numProcesses = 0, i = 0, j = 0, prevBurstTime = 0, temp = 0;
+    int numProcesses = 0, i = 0, j = 0, prevBurstTime = 0, temp = 0, processIdTemp = 0;
     int burstTime[10], backupBurstTime[10], waitTime[10] = {0}, turnAroundTime[10], responseTime[10], orderOfProcess[10];
     float avgWaitTime = 0.0, avgTurnAroundTime = 0.0, avgResponseTime = 0.0;
+
+    printf("\t CPU Scheduling Method: Shortest Job First \n");
 
     // Get user's input of how many processes to calculate for the FCFS algorithm
     // Get use to input burst time for each process
@@ -17,17 +19,22 @@ int main () {
         printf("\n\t Enter Burst Time for process %d: ", i + 1); 
         scanf("%d", &burstTime[i]); 
         backupBurstTime[i] = burstTime[i];
-        
+        orderOfProcess[i] = i + 1;
     }
 
     // Sort based on increasing burst time
     for (int i = 0; i < numProcesses; i++) {     
         for (int j = i+1; j < numProcesses; j++) {     
-           if(burstTime[i] > burstTime[j]) {    
-               temp = burstTime[i];    
-               burstTime[i] = burstTime[j];    
-               burstTime[j] = temp;    
-           }     
+            if(burstTime[i] > burstTime[j]) {    
+                temp = burstTime[i];    
+                burstTime[i] = burstTime[j];    
+                burstTime[j] = temp;
+
+                // array to keep track of process order when sorting
+                processIdTemp = orderOfProcess[i];
+                orderOfProcess[i] = orderOfProcess[j];
+                orderOfProcess[j] = processIdTemp;
+            }     
         }     
     }
 
@@ -35,7 +42,7 @@ int main () {
     // Initialise first process to have 0 turn around time and 0 response time
     turnAroundTime[0] = burstTime[0];
     responseTime[0] = 0;
-    // Calculate wait time & turnaround time for each process from secondary element onwards
+    // Calculate wait time, turnaround time and response time for each process from secondary element onwards
     for (i = 1; i < numProcesses; i++){
             
         j = i;
@@ -47,9 +54,9 @@ int main () {
 
     printf("\n\t PROCESS\t BURST TIME\t WAITING TIME\t TURNAROUND TIME\t RESPONSE TIME\n"); 
     for (i = 0; i < numProcesses; i++) 
-        printf("\t P%d \t\t %d \t\t\t %d \t\t\t %d \t\t\t %d \n",  i + 1, burstTime[i], waitTime[i], turnAroundTime[i], responseTime[i]);  
+        printf("\t P%d \t\t %d \t\t\t %d \t\t\t %d \t\t\t %d \n",  orderOfProcess[i], burstTime[i], waitTime[i], turnAroundTime[i], responseTime[i]);  
         
-    // Calculate total wait time and total turnaround time
+    // Calculate total wait time and total turnaround time and total response time
     for (i = 0;i < numProcesses; i++){
         avgWaitTime += waitTime[i];
         avgTurnAroundTime += turnAroundTime[i];
