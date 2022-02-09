@@ -15,30 +15,47 @@
                 "cwd": "C:\\msys64\\mingw64\\bin"
             },
             "problemMatcher": {
-                "base" : "$gcc",
-                "fileLocation" : "absolute"
+                "base": "$gcc",
+                "fileLocation": "absolute"
             },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
             "detail": "compiler: C:\\msys64\\mingw64\\bin\\gcc.exe"
         },
-
         {
             "type": "shell",
             "label": "Run This C Program",
             "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -g3 -Wall \"${file}\" -o \"${fileDirname}\\${fileBasenameNoExtension}.exe\" ;\"${fileDirname}\\${fileBasenameNoExtension}.exe\"",
-            
             "options": {
                 "cwd": "C:\\msys64\\mingw64\\bin"
             },
             "problemMatcher": {
-                "base" : "$gcc",
-                "fileLocation" : "absolute"
+                "base": "$gcc",
+                "fileLocation": "absolute"
             },
-            
             "detail": "compiler: C:\\msys64\\mingw64\\bin\\gcc.exe"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:/msys64/mingw64/bin/g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "C:/msys64/mingw64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "compiler: C:/msys64/mingw64/bin/g++.exe"
         }
     ],
     "version": "2.0.0"
