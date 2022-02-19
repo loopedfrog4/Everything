@@ -1,27 +1,7 @@
 def isValid(col, row, chessBoard):
   #check if there is another queen that makes the position 
   #check through upper vetical 
-  N = len(chessBoard) 
-  for r in range(row): 
-    if chessBoard[r][col] == 1: 
-      return False 
- 
-  r = row - 1 
-  c = col - 1 
-  while r >= 0 and c >= 0: 
-    if chessBoard[r][c]==1: 
-      return False 
-    r -= 1 
-    c -= 1 
-       
-  r = row - 1 
-  c = col + 1 
-  while r >= 0 and c < N: 
-    if chessBoard[r][c] == 1: 
-      return False 
-    r -= 1 
-    c += 1 
-  return True
+  pass
 
 def printSolution(chessBoard):
   print("\n")
