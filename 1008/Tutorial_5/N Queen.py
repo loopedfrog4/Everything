@@ -1,7 +1,30 @@
 def isValid(col, row, chessBoard):
   #check if there is another queen that makes the position 
   #check through upper vetical 
-  pass
+  N = len(chessBoard) 
+  for r in range(row): 
+    if chessBoard[r][col] == 1: 
+      return False 
+ 
+
+  # check through upper left diagonal
+  r = row - 1 
+  c = col - 1 
+  while r >= 0 and c >= 0: 
+    if chessBoard[r][c]==1: 
+      return False 
+    r -= 1 
+    c -= 1 
+       
+  # check through upper right diagonal
+  r = row - 1 
+  c = col + 1 
+  while r >= 0 and c < N: 
+    if chessBoard[r][c] == 1: 
+      return False 
+    r -= 1 
+    c += 1 
+  return True
 
 def printSolution(chessBoard):
   print("\n")
@@ -21,7 +44,7 @@ def putAQueen(row, chessBoard):
         return
       chessBoard[row][col] = 0
 
-N = 5
+N = 4
 chessBoard = []
 for i in range(N):
   chessBoard.append([])
