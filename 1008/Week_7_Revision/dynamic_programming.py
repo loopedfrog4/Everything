@@ -5,7 +5,7 @@ def dp_knapsack(cap,wt,val,n):
         for currentCap in range(0, cap+1): # iterate down the rows from Capacity: 0 to Capacity to 10 (so 11 times total)
             if currentCap < wt[i-1]: # if current capacity of truck is less than currently considered item
                 array[i-1][currentCap] = array[i][currentCap] # cannot take item, so take state of the right side
-            else: # capacity is bigger than the currently considered item, so take OR don't take
+            else: # capacity is equal or bigger than the currently considered item, so take OR don't take
                 array[i-1][currentCap] = max(array[i][currentCap], val[i-1] + array[i][currentCap - wt[i-1]])
                 #                        ^ don't take the currently considered item so take state at right
                 #                                                  ^ take ( currently considered item + the state of right after removing the weight of the currently considered item)
