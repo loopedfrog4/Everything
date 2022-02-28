@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch Q7",
+            "request": "launch",
+            "mainClass": "Q7",
+            "projectName": "Everything_f48a38b"
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
