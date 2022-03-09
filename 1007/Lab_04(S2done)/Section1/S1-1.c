@@ -58,21 +58,28 @@ void main()  {
     printf("File Allocation start at block: %d\n", TOTAL_DISK_INODES);
     printf("File Allocation end at block: %d\n", TOTAL_DISK_BLOCKS - 1);
     printf("Size (kb) of each block: %d\n", 1);
-
+    printf("\n");
     printf("Enter no of files: ");
     scanf("%d", &numFiles);
+    printf("\n");
 
     for(i = 0; i < numFiles; i++) {  
         printf("Enter the name of file #%d: ", i+1);
         scanf("%s", fileTable[i].fileName);
         printf("Enter the size (kb) of file #%d: ", i+1);
-        scanf("%d", &fileTable[i].fileSize); 
+        scanf("%d", &fileTable[i].fileSize);
+        printf("\n");
         ret = AllocateBlocks(fileTable[i].fileSize);
-        // printf("File Size %d\n", fileTable[i].fileSize);
+        printf("Start Block: %d\n", fileTable[i].startBlock);
         // printf("File Size %d\n", fileTable[i].fileSize);
     } 
 
     //Seed the pseudo-random number generator used by rand() with the value seed 
     srand(1234); 
+
+    for(i = 0; i < numFiles; i++) {  
+        printf("FILE_fileName \t FILE_SIZE \t BLOCKS_OCCUPIED\n");
+        printf("%s \t %d \t\t %d\n", fileTable[i].fileName, fileTable[i].fileSize, fileTable[i].startBlock);
+    } 
 
 }
