@@ -19,7 +19,7 @@ struct block {
 };  
  
 int AllocateBlocks(int Size) { 
-    --- 
+    
 } 
  
 void main()  

@@ -2,7 +2,7 @@
 #include <stdlib.h> 
 #include <string.h>  
  
-#define CIPHER_KEY 3 
+#define CIPHER_KEY -1
  
 void main() 
 { 
@@ -86,8 +86,8 @@ void main()
         ch = strEncrypted[i];  
      
         // Perform Caesar Cipher substitution decryption 
-        if (ch != ' ') { 
-            ch = ch - CIPHER_KEY;
+        if (ch != ' ') {
+            ch = (ch - CIPHER_KEY);
             strncat(strDecrypted, &ch, 1);  
         }else{
             strncat(strDecrypted, &ch, 1);  

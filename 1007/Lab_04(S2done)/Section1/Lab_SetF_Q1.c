@@ -2,7 +2,7 @@
 #include <stdlib.h>  
  
 #define TOTAL_DISK_BLOCKS 32 
-#define TOTAL_DISK_INODES 8  
+#define TOTAL_DISK_INODES 6  
 
 int blockStatus[TOTAL_DISK_BLOCKS]; // free = 0  
 int blockStart; 
@@ -58,7 +58,7 @@ void main()  {
     printf("Total blocks: %d\n", TOTAL_DISK_BLOCKS);
     printf("File Allocation start at block: %d\n", TOTAL_DISK_INODES);
     printf("File Allocation end at block: %d\n", TOTAL_DISK_BLOCKS - 1);
-    printf("Size (kb) of each block: %d\n", 1);
+    printf("Size (kb) of each block: %d\n", 2);
     printf("\n");
     printf("Enter no of files: ");
     scanf("%d", &numFiles);
@@ -84,13 +84,8 @@ void main()  {
 
     }
 
-    for (i = 0; i < 32; i++){
-        printf("%d\n", blockStatus[i]);
-    }
-    
-
     //Seed the pseudo-random number generator used by rand() with the value seed 
-    srand(1234); 
+    srand(654); 
 
     printf("FILE_fileName \t FILE_SIZE \t BLOCKS_OCCUPIED\n");
     for(i = 0; i < numFiles; i++) {  
