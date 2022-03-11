@@ -1,3 +1,5 @@
+// Resource Ref: https://www.geeksforgeeks.org/highest-response-ratio-next-hrrn-cpu-scheduling/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -41,11 +43,33 @@ void sortByArrivalTime(process arr[]){
     }
 }
 
+int FindMaxWaitingTime(process arr[]){
+    int posMax = 0;
+    for (int i = 1; i < numberOfProcesses; i++){
+        if (arr[posMax].waitTime < arr[i].waitTime){
+            posMax = i;
+        }
+    }
+    return arr[posMax].waitTime;
+}
+
+float FindMaxTurnAroundTime(process arr[]){
+    int posMax = 0;
+    for (int i = 1; i < numberOfProcesses; i++){
+        if (arr[posMax].turnAroundTime < arr[i].turnAroundTime){
+            posMax = i;
+        }
+    }
+    return arr[posMax].turnAroundTime;
+}
+
+
 int main () {
     FILE* fp;
     char  line[10];
     int count = 1;
     int i = 0;
+    int sumBurstTime = 0;
     process process_arr[numberOfProcesses];
 
     fp = fopen("testcase3.txt" , "r");
@@ -58,20 +82,72 @@ int main () {
         process_arr[i].processNum = count;
         process_arr[i].arrivalTime = atoi(arrival);
         process_arr[i].burstTime = atoi(burst);
+        process_arr[i].completed = 0;
+        sumBurstTime += atoi(burst);
         count += 1;
         i += 1;
     }
     
     // Call helper method to sort array of processes based on arrival time
     sortByArrivalTime(process_arr);
-    
-    // Print All Processes
-    for (int z = 0; z < numberOfProcesses; z++){
-        printf("P%d\n", process_arr[z].processNum);
-        printf("Arrival: %d\n", process_arr[z].arrivalTime);
-        printf("Burst: %d\n", process_arr[z].burstTime);
-        printf("\n");
+    printf("\nProcess Number\tArrival Time\tBurst Time\tWaiting Time");
+    printf("\tTurnAround Time");
+    for (int t = process_arr[0].arrivalTime; t < sumBurstTime;) {
+ 
+        // Set lower limit to response ratio
+        float hrr = -9999;
+ 
+        // Response Ratio Variable
+        float temp;
+ 
+        // Variable to store next process selected
+        int loc;
+        for (int k = 0; k < numberOfProcesses; k++) {
+ 
+            // Checking if process has arrived and is Incomplete
+            if (process_arr[k].arrivalTime <= t && process_arr[k].completed != 1) {
+ 
+                // Calculating Response Ratio
+                temp = (process_arr[k].burstTime+ (t - process_arr[k].arrivalTime)) / process_arr[k].burstTime;
+ 
+                // Checking for Highest Response Ratio
+                if (hrr < temp) {
+ 
+                    // Storing Response Ratio
+                    hrr = temp;
+ 
+                    // Storing Location
+                    loc = k;
+                }
+            }
+        }
+ 
+        // Updating time value
+        t += process_arr[loc].burstTime;
+ 
+        // Calculation of waiting time
+        process_arr[loc].waitTime = t - process_arr[loc].arrivalTime - process_arr[loc].burstTime;
+ 
+        // Calculation of Turn Around Time
+        process_arr[loc].turnAroundTime = t - process_arr[loc].arrivalTime;
+ 
+        // Sum Turn Around Time for average
+        avgTurnAroundTime += process_arr[loc].turnAroundTime;
+ 
+        // Updating Completion Status
+        process_arr[loc].completed = 1;
+ 
+        // Sum Waiting Time for average
+        avgWaitTime += process_arr[loc].waitTime;
+        printf("\n%d\t\t%d\t\t", process_arr[loc].processNum, process_arr[loc].arrivalTime);
+        printf("%d\t\t%d\t\t", process_arr[loc].burstTime, process_arr[loc].waitTime);
+        printf("%d", process_arr[loc].turnAroundTime);
     }
+
+    printf("\nAverage Turn Around time:%f\n", avgTurnAroundTime / numberOfProcesses);
+    printf("Max Turn Around time: %f\n", FindMaxTurnAroundTime(process_arr));
+    printf("Average waiting time:%f\n", avgWaitTime / numberOfProcesses);
+    printf("Max Waiting Time: %f\n", FindMaxWaitingTime(process_arr));
 
     return 0;
 }
