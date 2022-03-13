@@ -12,7 +12,7 @@ struct process{
     int burstTime;
     int waitTime;
     int turnAroundTime;
-    float ratio;
+    int completedTime;
     int completed; // 1 = Completed, 0 = Pending
 }typedef process;
 
@@ -43,11 +43,21 @@ void sortByArrivalTime(process arr[]){
     }
 }
 
+int findFirstArrivalTime(process arr[]){
+    int posMin = 0;
+    for (int i = 1; i < numberOfProcesses; i++){
+        if (arr[posMin].arrivalTime > arr[i].arrivalTime){
+            posMin = i;
+        }
+    }
+    return arr[posMin].arrivalTime;
+}
+
 int FindMaxWaitingTime(process arr[]){
     int posMax = 0;
-    for (int i = 1; i < numberOfProcesses; i++){
-        if (arr[posMax].waitTime < arr[i].waitTime){
-            posMax = i;
+    for (int z = 1; z < numberOfProcesses; z++){
+        if (arr[posMax].waitTime < arr[z].waitTime){
+            posMax = z;
         }
     }
     return arr[posMax].waitTime;
@@ -55,9 +65,9 @@ int FindMaxWaitingTime(process arr[]){
 
 float FindMaxTurnAroundTime(process arr[]){
     int posMax = 0;
-    for (int i = 1; i < numberOfProcesses; i++){
-        if (arr[posMax].turnAroundTime < arr[i].turnAroundTime){
-            posMax = i;
+    for (int x = 1; x < numberOfProcesses; x++){
+        if (arr[posMax].turnAroundTime < arr[x].turnAroundTime){
+            posMax = x;
         }
     }
     return arr[posMax].turnAroundTime;
@@ -72,13 +82,11 @@ int main () {
     int sumBurstTime = 0;
     process process_arr[numberOfProcesses];
 
-    fp = fopen("testcase3.txt" , "r");
+    fp = fopen("random.txt" , "r");
     while (fgets(line, sizeof(line), fp) != NULL)
     {
         const char* arrival = strtok(line, " ");
         const char* burst = strtok(NULL, " ");
-        // printf("P %d\n Arrival Time %s\n Burst Time %s\n", count, arrival, burst);
-        // printf("\n");
         process_arr[i].processNum = count;
         process_arr[i].arrivalTime = atoi(arrival);
         process_arr[i].burstTime = atoi(burst);
@@ -102,13 +110,13 @@ int main () {
  
         // Variable to store next process selected
         int loc;
-        for (int k = 0; k < numberOfProcesses; k++) {
+        for (i = 0; i < numberOfProcesses; i++) {
  
             // Checking if process has arrived and is Incomplete
-            if (process_arr[k].arrivalTime <= t && process_arr[k].completed != 1) {
+            if (process_arr[i].arrivalTime <= t && process_arr[i].completed != 1) {
  
                 // Calculating Response Ratio
-                temp = (process_arr[k].burstTime+ (t - process_arr[k].arrivalTime)) / process_arr[k].burstTime;
+                temp = (process_arr[i].burstTime + (t - process_arr[i].arrivalTime) + (numberOfProcesses / 2)) / process_arr[i].burstTime;
  
                 // Checking for Highest Response Ratio
                 if (hrr < temp) {
@@ -117,7 +125,7 @@ int main () {
                     hrr = temp;
  
                     // Storing Location
-                    loc = k;
+                    loc = i;
                 }
             }
         }
@@ -141,7 +149,7 @@ int main () {
         avgWaitTime += process_arr[loc].waitTime;
         printf("\n%d\t\t%d\t\t", process_arr[loc].processNum, process_arr[loc].arrivalTime);
         printf("%d\t\t%d\t\t", process_arr[loc].burstTime, process_arr[loc].waitTime);
-        printf("%d", process_arr[loc].turnAroundTime);
+        printf("%d\t", process_arr[loc].turnAroundTime);
     }
 
     printf("\nAverage Turn Around time:%f\n", avgTurnAroundTime / numberOfProcesses);
