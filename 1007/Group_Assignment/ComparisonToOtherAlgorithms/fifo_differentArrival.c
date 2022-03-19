@@ -72,6 +72,36 @@ void findCompletionTime(process process[], int n)
     }
 }
 
+int biggestWaitingTimeProcess(process arr[]){
+    //Initialize min with first element of array.    
+    int min = arr[0].waitTime;
+      
+    //Loop through the array    
+    for (int i = 0; i < numberOfProcesses; i++) {     
+        //Compare elements of array with min    
+        if(arr[i].waitTime > min){
+            min = arr[i].waitTime; 
+        }  
+            
+    }      
+    return min;
+}
+
+int biggestTurnAroundTimeProcess(process arr[]){
+    //Initialize min with first element of array.    
+    int min = arr[0].turnAroundTime;
+      
+    //Loop through the array    
+    for (int i = 0; i < numberOfProcesses; i++) {     
+        //Compare elements of array with min    
+        if(arr[i].turnAroundTime > min){
+            min = arr[i].turnAroundTime; 
+        }  
+            
+    }      
+    return min;
+}
+
 void findTurnAroundTime(process process[], int n) 
 { 
 	for (int i = 0; i < n ; i++) 
@@ -96,8 +126,10 @@ void findavgTime(process process[], int n)
         printf("%d \t\t %d \t\t %d \t\t %d \t\t %d \t\t\t %d\n", process[i].processNum, process[i].arrivalTime, process[i].burstTime, process[i].waitTime, process[i].turnAroundTime, process[i].completedTime);
     } 
 
-    printf("Average waiting time: %.2f",(float)total_wt / (float)n); 
-    printf("\nAverage turn around time: %.2f",(float)total_tat / (float)n);  
+    printf("Average waiting time: %.2f\n",(float)total_wt / (float)n);
+    printf("Max waiting time: %d\n", biggestWaitingTimeProcess(process));
+    printf("Average turn around time: %.2f\n",(float)total_tat / (float)n);
+    printf("Max Turnaround time: %d\n", biggestTurnAroundTimeProcess(process));  
 }
 
 void sortByArrivalTime(process arr[]){
