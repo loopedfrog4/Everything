@@ -149,7 +149,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define numberOfProcesses 5
+#define numberOfProcesses 10
 
 struct process
 {
@@ -188,7 +188,7 @@ int biggestWaitingTimeProcess(struct process arr[]){
     int min = arr[0].WT;
       
     //Loop through the array    
-    for (int i = 0; i < 10; i++) {     
+    for (int i = 0; i < numberOfProcesses; i++) {     
         //Compare elements of array with min    
         if(arr[i].WT > min){
             min = arr[i].WT; 
@@ -203,7 +203,7 @@ int biggestTurnAroundTimeProcess(struct process arr[]){
     int min = arr[0].TAT;
       
     //Loop through the array    
-    for (int i = 0; i < 10; i++) {     
+    for (int i = 0; i < numberOfProcesses; i++) {     
         //Compare elements of array with min    
         if(arr[i].TAT > min){
             min = arr[i].TAT; 
@@ -227,7 +227,7 @@ int main()
     float total_wt=0,total_tat=0,Avg_WT,Avg_TAT;
     
 
-    fp = fopen("testcase3.txt" , "r");
+    fp = fopen("dummy.txt" , "r");
     while (fgets(line, sizeof(line), fp) != NULL)
     {
         const char* arrival = strtok(line, " ");
@@ -299,7 +299,6 @@ int main()
     {
         printf("%d  %d  %d\n",a[i].id,a[i].WT,a[i].TAT);
     }
-
 
     printf("Average waiting time of the processes is : %f\n",Avg_WT);
     printf("Max waiting time of the processes is : %d\n",biggestWaitingTimeProcess(a));
