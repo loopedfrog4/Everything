@@ -149,7 +149,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define numberOfProcesses 10
+#define numberOfProcesses 5
 
 struct process
 {
@@ -227,7 +227,7 @@ int main()
     float total_wt=0,total_tat=0,Avg_WT,Avg_TAT;
     
 
-    fp = fopen("dummy.txt" , "r");
+    fp = fopen("testcase3.txt" , "r");
     while (fgets(line, sizeof(line), fp) != NULL)
     {
         const char* arrival = strtok(line, " ");

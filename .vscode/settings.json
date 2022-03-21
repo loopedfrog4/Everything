@@ -11,6 +11,7 @@
         "string_view": "c",
         "typeindex": "cpp",
         "random": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "ostream": "c"
     }
 }

@@ -4,8 +4,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <conio.h>
+#include <Python.h>
 
-#define numberOfProcesses 5
+#define numberOfProcesses 20
 
 struct process{
     int processNum;
@@ -162,7 +165,18 @@ int main () {
     int sumBurstTime = 0;
     process process_arr[numberOfProcesses];
 
-    fp = fopen("testcase3.txt" , "r");
+    char filename[] = "callGenerator.py";
+	FILE* fp2;
+
+	Py_Initialize();
+
+	fp2 = _Py_fopen(filename, "r");
+	PyRun_SimpleFile(fp, filename);
+
+	Py_Finalize();
+
+
+    fp = fopen("dummy.txt" , "r");
     while (fgets(line, sizeof(line), fp) != NULL)
     {
         const char* arrival = strtok(line, " ");
