@@ -1,54 +1,82 @@
-#include<stdio.h>
-void main()
+// Ref: http://nitcselabprograms.blogspot.com/p/c-program-for-lfu-page-replacement.html
+#include <stdio.h>
+void print(int frameno,int frame[])
 {
-    int pageNumbers[25], frameContents[25];
-    int i = 0, j = 0, k = 0;
-    int numPages = 0, numFrames = 0, totalPageFaults = 0;
-    int minArrivalIndex = 0, min_count = 0, next =0;
-    int framePageRepeatCount[25], arrivalIndex[25];
+    int j;
+    for(j=0;j<frameno;j++)
+        printf("%d \t \t",frame[j]);
+}         
+int main()
+{
+    int i,j,k,n,page[25],frameno,frame[25],move=0,flag,count=0,count1[25]={0}, repindex,leastcount;
+    float rate;
     printf("\n Page Replacement Method: Least Frequently Used (LFU) with FIFO");
+
     printf("\n Enter the number of pages in the page sequence: ");
-    scanf("%d", &numPages);
-    //numPages = 20;
+    scanf("%d",&n);
 
     printf("\n Enter the page numbers in sequence as a string: ");
-    // 7 0 1 2 0 3 0 4 2 3 0 3 2 1 2 0 1 7 0 1
-    for (i = 0; i < numPages; i++){
-        scanf("%d", &pageNumbers[i]);
-    }
-    
+    for(i=0;i<n;i++)
+        scanf("%d",&page[i]);
+
     printf("\nEnter the number of frames: ");
-    scanf("%d", &numFrames);
-    // 3
+    scanf("%d",&frameno);
 
-    for (i = 0; i < numFrames; i++){
-        framePageRepeatCount[i] = -1;
-        frameContents[i] = -1;
-        arrivalIndex[i] = -1;
-    }
+    for(i=0;i<frameno;i++)
+        frame[i]=-1;
 
-    printf("\n The Page Replacement Process is\n");
+    printf("\n The Page Replacement Process is \n");
     printf("\tREF STRING");
-    for (j = 0; j < numFrames; j++){
-        printf("\tPAGE_FRAME%d", j + 1);
+    for (j = 0; j < frameno; j++){
+        printf("\tPAGE_FRAME_%d", j + 1);
     }
     printf("\tPAGE_FAULT_NUMBER\n");
 
-    // First n, where n = numFrames, is always the same
-    for (i = 0; i < numFrames; i++){
-        frameContents[i] = pageNumbers[i];
-        printf("\t %d \t \t", pageNumbers[i]);
-        for (j = 0; j < numFrames; j++){
-            printf("%d \t \t", frameContents[j]);
+    for(i=0;i<n;i++)
+    {
+        printf("\t %d \t \t",page[i]);
+        flag=0;
+        for(j=0;j<frameno;j++)
+        {
+            if(page[i]==frame[j])
+            {
+                flag=1;
+                count1[j]++;
+                print(frameno,frame);
+                printf("%d\n", count);
+                break;
+            }
         }
-        totalPageFaults++;
-        printf("%d\n", totalPageFaults);
+        if(flag==0&&count<frameno)
+        {
+            frame[move]=page[i];
+            count1[move]=1;
+            move=(move+1)%frameno;
+            count++;
+            print(frameno,frame);
+            printf("%d\n", count);
+        }
+        else if(flag==0)
+        {
+            repindex=0;
+            leastcount=count1[0];
+            for(j=1;j<frameno;j++)
+            {
+                if(count1[j]<leastcount)
+                {
+                    repindex=j;
+                    leastcount=count1[j];
+                }
+            }
+            
+            frame[repindex]=page[i];
+            count1[repindex]=1;
+            count++;
+            print(frameno,frame);
+            printf("%d\n", count);
+        }
     }
-
     
-
-
-
-    /* Find the occurance of page faults and the total number of page faults */
-    printf("\n\n Total number of page faults using LFU with FIFO: %d \n", totalPageFaults);
+    printf("\n\n Total number of Page Faults using FIFO: %d \n", count);
+    return 0;
 }

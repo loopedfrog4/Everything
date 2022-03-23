@@ -30,6 +30,11 @@ void main()
     scanf("%d", &numPages);
     printf("\n Enter the page numbers in sequence as a string: ");
     // 7 0 1 2 0 3 0 4 2 3 0 3 2 1 2 0 1 7 0 1
+    // 15
+
+    // 12
+    // 0 1 2 3 0 1 4 0 1 2 3 4
+    // 9
     for (i = 0; i < numPages; i++){
         scanf("%d", &pageNumbers[i]);
     }
