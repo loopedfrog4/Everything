@@ -77,6 +77,6 @@ int main()
         }
     }
     
-    printf("\n\n Total number of Page Faults using FIFO: %d \n", count);
+    printf("\n\n Total number of page faults using LFU with FIFO: %d \n", count);
     return 0;
 }
